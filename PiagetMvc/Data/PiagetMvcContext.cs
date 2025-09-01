@@ -15,5 +15,6 @@ namespace PiagetMvc.Data
         }
 
         public DbSet<PiagetMvc.Models.Aluno> Aluno { get; set; } = default!;
+        public DbSet<PiagetMvc.Models.Professor> Professor { get; set; } = default!;
     }
 }

@@ -10,22 +10,22 @@ using PiagetMvc.Models;
 
 namespace PiagetMvc.Controllers
 {
-    public class AlunoController : Controller
+    public class ProfessorController : Controller
     {
         private readonly PiagetMvcContext _context;
 
-        public AlunoController(PiagetMvcContext context)
+        public ProfessorController(PiagetMvcContext context)
         {
             _context = context;
         }
 
-        // GET: Aluno
+        // GET: Professor
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Aluno.ToListAsync());
+            return View(await _context.Professor.ToListAsync());
         }
 
-        // GET: Aluno/Details/5
+        // GET: Professor/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -33,40 +33,40 @@ namespace PiagetMvc.Controllers
                 return NotFound();
             }
 
-            var aluno = await _context.Aluno
+            var professor = await _context.Professor
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (aluno == null)
+            if (professor == null)
             {
                 return NotFound();
             }
 
-            return View(aluno);
+            return View(professor);
         }
 
-        // GET: Aluno/Create
+        // GET: Professor/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Aluno/Create
+        // POST: Professor/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,Email,Telefone,Idade,Notas,Id")] Aluno aluno)
+        public async Task<IActionResult> Create([Bind("Nome,Email,Telefone,Id")] Professor professor)
         {
             if (ModelState.IsValid)
             {
-                aluno.Id = Guid.NewGuid();
-                _context.Add(aluno);
+                professor.Id = Guid.NewGuid();
+                _context.Add(professor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(aluno);
+            return View(professor);
         }
 
-        // GET: Aluno/Edit/5
+        // GET: Professor/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -74,22 +74,22 @@ namespace PiagetMvc.Controllers
                 return NotFound();
             }
 
-            var aluno = await _context.Aluno.FindAsync(id);
-            if (aluno == null)
+            var professor = await _context.Professor.FindAsync(id);
+            if (professor == null)
             {
                 return NotFound();
             }
-            return View(aluno);
+            return View(professor);
         }
 
-        // POST: Aluno/Edit/5
+        // POST: Professor/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Nome,Email,Telefone,Idade,Notas,Id")] Aluno aluno)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Nome,Email,Telefone,Id")] Professor professor)
         {
-            if (id != aluno.Id)
+            if (id != professor.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace PiagetMvc.Controllers
             {
                 try
                 {
-                    _context.Update(aluno);
+                    _context.Update(professor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AlunoExists(aluno.Id))
+                    if (!ProfessorExists(professor.Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +114,10 @@ namespace PiagetMvc.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(aluno);
+            return View(professor);
         }
 
-        // GET: Aluno/Delete/5
+        // GET: Professor/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -125,34 +125,34 @@ namespace PiagetMvc.Controllers
                 return NotFound();
             }
 
-            var aluno = await _context.Aluno
+            var professor = await _context.Professor
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (aluno == null)
+            if (professor == null)
             {
                 return NotFound();
             }
 
-            return View(aluno);
+            return View(professor);
         }
 
-        // POST: Aluno/Delete/5
+        // POST: Professor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var aluno = await _context.Aluno.FindAsync(id);
-            if (aluno != null)
+            var professor = await _context.Professor.FindAsync(id);
+            if (professor != null)
             {
-                _context.Aluno.Remove(aluno);
+                _context.Professor.Remove(professor);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AlunoExists(Guid id)
+        private bool ProfessorExists(Guid id)
         {
-            return _context.Aluno.Any(e => e.Id == id);
+            return _context.Professor.Any(e => e.Id == id);
         }
     }
 }

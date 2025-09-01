@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PiagetMvc.Migrations
 {
     /// <inheritdoc />
-    public partial class Piaget : Migration
+    public partial class Professor : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Aluno",
+                name: "Professor",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -22,17 +22,15 @@ namespace PiagetMvc.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Aluno", x => x.Id);
+                    table.PrimaryKey("PK_Professor", x => x.Id);
                 });
         }
-
-       
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Aluno");
+                name: "Professor");
         }
     }
 }

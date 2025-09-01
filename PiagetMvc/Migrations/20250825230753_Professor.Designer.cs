@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PiagetMvc.Data;
 
@@ -11,9 +12,11 @@ using PiagetMvc.Data;
 namespace PiagetMvc.Migrations
 {
     [DbContext(typeof(PiagetMvcContext))]
-    partial class PiagetMvcContextModelSnapshot : ModelSnapshot
+    [Migration("20250825230753_Professor")]
+    partial class Professor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,14 +34,8 @@ namespace PiagetMvc.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Idade")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Notas")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Telefone")
                         .HasColumnType("nvarchar(max)");
